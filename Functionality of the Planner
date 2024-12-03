@@ -11,12 +11,6 @@ Implementation:
 A module to define goal parameters (target amount, timeframe).
 Progress tracking with visualizations like percentage bars or goal completion dates.
 Notification system to remind users about goal milestones.
-3. Expense Tracking
-Functionality: Log and categorize expenses manually or via uploads.
-Implementation:
-Forms for manual expense input with category dropdowns.
-File upload support for importing bank statements.
-Visualization tools like pie charts for category-wise expense summaries.
 4. Savings and Investments
 Functionality: Track savings progress and investment portfolios.
 Implementation:
