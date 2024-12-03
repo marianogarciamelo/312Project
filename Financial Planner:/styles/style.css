@@ -1,0 +1,472 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #3f3d56;
+    color: #ffffff;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.navbar .logo {
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-decoration: none;
+}
+.navbar nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+.navbar nav ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+.navbar nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    background-color: #f8f9fa;
+}
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #000000;
+}
+.hero-subtitle {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #333333;
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+.hero-links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+.hero-links .link {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #007bff;
+    text-decoration: none;
+}
+.hero-links .link:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background-color: #3f3d56;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9rem;
+}
+
+/* Budget Section */
+.budget-section {
+    padding: 60px 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+.budget-section .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.budget-section .section-subtitle {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+.budget-form {
+    margin: 0 auto 40px;
+    max-width: 400px;
+}
+.budget-form .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+.budget-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+.budget-form input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.budget-form .btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.budget-summary {
+    margin-top: 40px;
+    text-align: left;
+}
+.budget-summary h2 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+.budget-summary .remaining-income {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #007bff;
+}
+.budget-summary .warning {
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
+.budget-summary ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+.budget-summary ul li {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+/* Chart Container */
+.chart-container {
+    margin-top: 40px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.chart-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+#expenseChart {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Summary */
+.remaining-income {
+    font-size: 1.5rem;
+    color: #007bff;
+}
+
+/* Goals Section */
+.goals-section {
+    padding: 60px 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+.goals-section .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.goals-section .section-subtitle {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+.goal-form {
+    margin: 0 auto 40px;
+    max-width: 400px;
+}
+.goal-form .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+.goal-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+.goal-form input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.goal-form .btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.goal-list {
+    margin-top: 40px;
+    text-align: left;
+}
+.goal-list h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.goal-list ul {
+    list-style: none;
+    padding: 0;
+}
+.goal-list ul li {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.goal-list ul li .goal-progress-bar {
+    margin-top: 10px;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+.goal-list ul li .goal-progress-bar .progress {
+    height: 100%;
+    background-color: #28a745;
+    width: 0;
+    transition: width 0.3s ease;
+}
+/* Investment Section */
+.investments-section {
+    padding: 60px 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+.investments-section .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.investments-section .section-subtitle {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+.investment-form, .investment-list {
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: left;
+}
+.investment-form .form-group {
+    margin-bottom: 20px;
+}
+.investment-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+.investment-form input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.investment-list ul {
+    list-style: none;
+    padding: 0;
+}
+.investment-list ul li {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.investment-list ul li canvas {
+    max-width: 100%;
+    margin-top: 20px;
+}
+.investment-list ul li button {
+    margin-top: 10px;
+}
+/* Resources Section */
+.resources-section {
+    padding: 60px 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+.resources-section .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.resources-section .section-subtitle {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+.resource-category {
+    margin-bottom: 40px;
+    text-align: left;
+}
+.resource-category h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.resource-list {
+    list-style: none;
+    padding: 0;
+}
+.resource-list li {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.resource-list li a {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #007bff;
+    text-decoration: none;
+}
+.resource-list li p {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #333;
+}
+.resource-list li a:hover {
+    text-decoration: underline;
+}
+/* Auth Section */
+.auth-section {
+    padding: 60px 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+.auth-section .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.auth-section .section-subtitle {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+.auth-form {
+    margin: 0 auto;
+    max-width: 400px;
+    text-align: left;
+}
+.auth-form .form-group {
+    margin-bottom: 20px;
+}
+.auth-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+.auth-form input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.auth-form .btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.auth-form .auth-link {
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+.auth-form .auth-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+.auth-form .auth-link a:hover {
+    text-decoration: underline;
+}
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-content {
+    background-color: #ffffff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+.modal-content h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+}
