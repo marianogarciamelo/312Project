@@ -306,38 +306,3 @@ window.updateInvestment = (index) => {
     renderInvestments();
   }
 };
-// Login Modal Functionality
-const loginButton = document.getElementById("loginButton");
-const loginModal = document.getElementById("loginModal");
-const closeLogin = document.getElementById("closeLogin");
-
-loginButton.addEventListener("click", () => {
-  loginModal.style.display = "block";
-});
-
-closeLogin.addEventListener("click", () => {
-  loginModal.style.display = "none";
-});
-
-// Register Modal Functionality
-const registerButton = document.getElementById("registerButton");
-const registerModal = document.getElementById("registerModal");
-const closeRegister = document.getElementById("closeRegister");
-
-registerButton.addEventListener("click", () => {
-  registerModal.style.display = "block";
-});
-
-closeRegister.addEventListener("click", () => {
-  registerModal.style.display = "none";
-});
-
-// Close modals when clicking outside the modal
-window.addEventListener("click", (e) => {
-  if (e.target === loginModal) {
-    loginModal.style.display = "none";
-  }
-  if (e.target === registerModal) {
-    registerModal.style.display = "none";
-  }
-});
