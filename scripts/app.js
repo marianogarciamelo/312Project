@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const budgetList = document.getElementById("budgetList");
   const warningMessage = document.getElementById("warning");
   const expenseChartCanvas = document.getElementById("expenseChart");
-
   let totalIncome = 0;
   let remainingIncome = 0;
   const categories = {};
@@ -225,23 +224,25 @@ const investments = []; // Array to store investments
 // Add a new investment
 investmentForm?.addEventListener("submit", (e) => {
   e.preventDefault();
+  if (document.getElementById("investedDate").value != "") {
+    const name = document.getElementById("investmentName").value.trim();
+    const initialValue =
+      parseFloat(document.getElementById("investmentValue").value) || 0;
+    const investedDate = document.getElementById("investedDate").value;
+    if (name && initialValue > 0) {
+      const newInvestment = {
+        name,
+        values: [{ value: initialValue, timestamp: investedDate }],
+      };
 
-  const name = document.getElementById("investmentName").value.trim();
-  const initialValue =
-    parseFloat(document.getElementById("investmentValue").value) || 0;
+      investments.push(newInvestment);
+      renderInvestments();
+    }
 
-  if (name && initialValue > 0) {
-    const newInvestment = {
-      name,
-      values: [initialValue],
-      timestamps: [new Date().toLocaleDateString()],
-    };
-
-    investments.push(newInvestment);
-    renderInvestments();
+    investmentForm.reset();
+  } else {
+    alert("Please complete form");
   }
-
-  investmentForm.reset();
 });
 
 // Render Investments
@@ -249,18 +250,20 @@ function renderInvestments() {
   investmentsContainer.innerHTML = "";
 
   investments.forEach((investment, index) => {
+    investment.values.sort(
+      (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+    );
     const listItem = document.createElement("li");
     listItem.innerHTML = `
             <h3>${investment.name}</h3>
             <p>Latest Value: $${
-              investment.values[investment.values.length - 1]
+              investment.values[investment.values.length - 1].value
             }</p>
             <canvas id="investmentChart-${index}" width="400" height="200"></canvas>
             <button onclick="updateInvestment(${index})" class="btn btn-primary">Add Data Point</button>
         `;
 
     investmentsContainer.appendChild(listItem);
-
     // Render chart for each investment
     const ctx = document
       .getElementById(`investmentChart-${index}`)
@@ -268,11 +271,11 @@ function renderInvestments() {
     new Chart(ctx, {
       type: "line",
       data: {
-        labels: investment.timestamps,
+        labels: investment.values.map((value) => value.timestamp),
         datasets: [
           {
             label: `${investment.name} Growth`,
-            data: investment.values,
+            data: investment.values.map((value) => value.value),
             borderColor: "#007bff",
             fill: false,
             tension: 0.1,
@@ -294,11 +297,12 @@ function renderInvestments() {
 // Update an existing investment
 window.updateInvestment = (index) => {
   const newValue =
-    parseFloat(prompt("Enter the new value for this investment ($):")) || 0;
-
+    parseFloat(prompt("Enter the value for this data point ($):")) || 0;
   if (newValue > 0) {
-    investments[index].values.push(newValue);
-    investments[index].timestamps.push(new Date().toLocaleDateString());
+    const date = prompt("Enter the date of this data point (YYYY-MM-DD)");
+
+    investments[index].values.push({ value: newValue, timestamp: date });
+
     renderInvestments();
   }
 };
