@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const budgetList = document.getElementById("budgetList");
   const warningMessage = document.getElementById("warning");
   const expenseChartCanvas = document.getElementById("expenseChart");
+
   let totalIncome = 0;
   let remainingIncome = 0;
   const categories = {};
@@ -38,14 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
     options: {
       responsive: true,
       plugins: {
-        legend: {
-          position: "top",
-        },
+        legend: { position: "top" },
       },
     },
   });
 
-  incomeForm.addEventListener("submit", (e) => {
+  // Income Form Submission
+  incomeForm?.addEventListener("submit", (e) => {
     e.preventDefault();
     totalIncome = parseFloat(incomeInput.value) || 0;
     remainingIncome = totalIncome;
@@ -53,7 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
     incomeInput.disabled = true;
   });
 
-  categoryForm.addEventListener("submit", (e) => {
+  // Category Form Submission
+  categoryForm?.addEventListener("submit", (e) => {
     e.preventDefault();
     const categoryName = categoryNameInput.value.trim();
     const categoryBudget = parseFloat(categoryBudgetInput.value) || 0;
@@ -68,153 +69,147 @@ document.addEventListener("DOMContentLoaded", () => {
     categoryBudgetInput.value = "";
   });
 
-  expenseForm.addEventListener("submit", (e) => {
+  // Expense Form Submission
+  expenseForm?.addEventListener("submit", (e) => {
     e.preventDefault();
     const category = expenseCategorySelect.value;
     const expense = parseFloat(expenseAmountInput.value) || 0;
 
-    if (category && expense > 0 && remainingIncome >= expense) {
-      categories[category].expenses += expense;
-      remainingIncome -= expense;
+    if (category && expense > 0) {
+      if (remainingIncome >= expense) {
+        categories[category].expenses += expense;
+        remainingIncome -= expense;
 
-      updateRemainingIncome();
-      updateBudgetList();
-      updateChart();
-    } else if (remainingIncome < expense) {
-      warningMessage.style.display = "block";
+        updateRemainingIncome();
+        updateBudgetList();
+        updateChart();
+      } else {
+        warningMessage.style.display = "block";
+      }
     }
 
     expenseAmountInput.value = "";
   });
 
+  // Update Remaining Income Display
   function updateRemainingIncome() {
-    remainingIncomeDisplay.textContent = `Remaining Monthly Income: $${remainingIncome}`;
+    remainingIncomeDisplay.textContent = `Remaining Monthly Income: $${remainingIncome.toFixed(
+      2
+    )}`;
   }
 
+  // Update Expense Category Options
   function updateCategoryOptions() {
     expenseCategorySelect.innerHTML =
       '<option value="" disabled selected>Select a category</option>';
-    for (const categoryName in categories) {
+    Object.keys(categories).forEach((categoryName) => {
       const option = document.createElement("option");
       option.value = categoryName;
       option.textContent = categoryName;
       expenseCategorySelect.appendChild(option);
-    }
+    });
   }
 
+  // Update Budget List
   function updateBudgetList() {
     budgetList.innerHTML = "";
-    for (const [categoryName, data] of Object.entries(categories)) {
+    Object.entries(categories).forEach(([categoryName, data]) => {
       const listItem = document.createElement("li");
-      listItem.textContent = `${categoryName}: Budget $${data.budget}, Spent $${
-        data.expenses
-      }, Remaining $${data.budget - data.expenses}`;
+      listItem.textContent = `${categoryName}: Budget $${data.budget.toFixed(
+        2
+      )}, Spent $${data.expenses.toFixed(2)}, Remaining $${(
+        data.budget - data.expenses
+      ).toFixed(2)}`;
       budgetList.appendChild(listItem);
-    }
+    });
   }
 
+  // Update Expense Chart
   function updateChart() {
-    const labels = Object.keys(categories);
-    const data = labels.map(
-      (categoryName) => categories[categoryName].expenses
+    expenseChart.data.labels = Object.keys(categories);
+    expenseChart.data.datasets[0].data = Object.values(categories).map(
+      (data) => data.expenses
     );
-
-    expenseChart.data.labels = labels;
-    expenseChart.data.datasets[0].data = data;
     expenseChart.update();
   }
 });
+
 /* ---------------- GOALS FUNCTIONALITY ---------------- */
-const goalForm = document.getElementById("goalForm");
-const goalsContainer = document.getElementById("goalsContainer");
-function getMonthsToTargetDate(targetMonth) {
-  // Parse the target month
-  const [year, month] = targetMonth.split("-").map(Number);
+document.addEventListener("DOMContentLoaded", () => {
+  const goalForm = document.getElementById("goalForm");
+  const goalsContainer = document.getElementById("goalsContainer");
+  const goals = [];
 
-  // Create a date object for the target month
-  const targetDate = new Date(year, month - 1); // month is 0-based in JavaScript
-
-  // Get today's date
-  const today = new Date();
-
-  // Calculate the difference in years and months
-  const yearsDiff = targetDate.getFullYear() - today.getFullYear();
-  const monthsDiff = targetDate.getMonth() - today.getMonth();
-
-  // Total difference in months
-  const totalMonths = yearsDiff * 12 + monthsDiff;
-
-  return totalMonths;
-}
-const goals = [];
-
-// Add a new goal
-goalForm?.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const goalName = document.getElementById("goalName").value.trim();
-  const goalTarget =
-    parseFloat(document.getElementById("goalTarget").value) || 0;
-  const goalDeadline = document.getElementById("goalDeadline").value;
-
-  if (goalName && goalTarget > 0 && goalDeadline) {
-    const newGoal = {
-      name: goalName,
-      target: goalTarget,
-      saved: 0,
-      deadline: goalDeadline,
-    };
-
-    goals.push(newGoal);
-    updateGoalList();
+  // Calculate months to target date
+  function getMonthsToTargetDate(targetMonth) {
+    const [year, month] = targetMonth.split("-").map(Number);
+    const targetDate = new Date(year, month - 1);
+    const today = new Date();
+    return (
+      (targetDate.getFullYear() - today.getFullYear()) * 12 +
+      targetDate.getMonth() -
+      today.getMonth()
+    );
   }
 
-  goalForm.reset();
+  // Update Goal List
+  function updateGoalList() {
+    goalsContainer.innerHTML = "";
+    goals.forEach((goal, index) => {
+      const months = getMonthsToTargetDate(goal.deadline);
+      const listItem = document.createElement("li");
+      listItem.innerHTML = `
+        <h3>${goal.name}</h3>
+        <p>Target: $${goal.target}</p>
+        <p>Saved: $${goal.saved}</p>
+        <p>Deadline: ${goal.deadline}</p>
+        <p>Monthly Goal: $${Math.round((goal.target - goal.saved) / months)}</p>
+        <div class="goal-progress-bar">
+          <div class="progress" style="width: ${
+            (goal.saved / goal.target) * 100
+          }%"></div>
+        </div>
+        <button class="btn btn-success" onclick="addToGoal(${index})">Add Funds</button>
+        <button class="btn btn-danger" onclick="removeGoal(${index})">Remove Goal</button>`;
+      goalsContainer.appendChild(listItem);
+    });
+  }
+
+  // Add funds to a goal
+  window.addToGoal = (index) => {
+    const amount = parseFloat(prompt("Enter amount to add:")) || 0;
+    if (amount > 0) {
+      goals[index].saved += amount;
+      updateGoalList();
+    }
+  };
+
+  // Remove a goal
+  window.removeGoal = (index) => {
+    goals.splice(index, 1);
+    updateGoalList();
+  };
+
+  goalForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const goalName = document.getElementById("goalName").value.trim();
+    const goalTarget =
+      parseFloat(document.getElementById("goalTarget").value) || 0;
+    const goalDeadline = document.getElementById("goalDeadline").value;
+
+    if (goalName && goalTarget > 0 && goalDeadline) {
+      goals.push({
+        name: goalName,
+        target: goalTarget,
+        saved: 0,
+        deadline: goalDeadline,
+      });
+      updateGoalList();
+    }
+    goalForm.reset();
+  });
 });
 
-// Update the goal list display
-function updateGoalList() {
-  goalsContainer.innerHTML = "";
-
-  goals.forEach((goal, index) => {
-    const listItem = document.createElement("li");
-    months = getMonthsToTargetDate(goal.deadline);
-    listItem.innerHTML = `
-            <h3>${goal.name}</h3>
-            <p>Target: $${goal.target}</p>
-            <p>Saved: $${goal.saved}</p>
-            <p>Deadline: ${goal.deadline}</p>
-            <p>Monthly Goal: $${Math.round(
-              (goal.target - goal.saved) / months
-            )}</p>           
-            <div class="goal-progress-bar">
-                <div class="progress" style="width: ${
-                  (goal.saved / goal.target) * 100
-                }%"></div>
-            </div>
-            <button class="btn btn-success" onclick="addToGoal(${index})">Add Funds</button>
-            <button class="btn btn-danger" onclick="removeGoal(${index})">Remove Goal</button>
-        `;
-
-    goalsContainer.appendChild(listItem);
-  });
-}
-
-// Add funds to a goal
-window.addToGoal = (index) => {
-  const amount = parseFloat(prompt("Enter amount to add:")) || 0;
-
-  if (amount > 0) {
-    goals[index].saved += amount;
-    updateGoalList();
-  }
-};
-
-// Remove a goal
-window.removeGoal = (index) => {
-  goals.splice(index, 1);
-  updateGoalList();
-};
 /* ---------------- INVESTMENT FUNCTIONALITY ---------------- */
 const investmentForm = document.getElementById("investmentForm");
 const investmentsContainer = document.getElementById("investmentsContainer");
