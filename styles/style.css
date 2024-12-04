@@ -11,6 +11,17 @@ body {
   line-height: 1.6;
 }
 
+.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 /* Navbar */
 .navbar {
   background-color: #3f3d56;
@@ -100,7 +111,7 @@ footer {
 
 /* Budget Section */
 .budget-forms {
-  padding-left: 35%;
+  padding-left: 10%;
   text-align: left;
 }
 .budget-section .container {
@@ -143,6 +154,15 @@ footer {
   border: 1px solid #ddd;
   border-radius: 4px;
 }
+
+input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
 .budget-form .btn {
   display: inline-block;
   padding: 12px 20px;
