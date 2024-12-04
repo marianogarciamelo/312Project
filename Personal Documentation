@@ -1,0 +1,42 @@
+# Financial Planner Web Application
+
+![Project Screenshot](path-to-screenshot) <!-- Add an image link or remove if not available -->
+
+## Overview
+The Financial Planner web application empowers users to manage their finances effectively. Features include:
+- **Budget Planning**: Allocate budgets and track expenses with visual feedback.
+- **Goal Tracking**: Set and monitor financial goals with progress indicators.
+- **Investment Management**: Track portfolio growth over time with dynamic visualizations.
+- **Resources**: Access curated financial literacy tools and materials.
+- **Secure Authentication**: Login and registration functionalities to protect user data.
+
+---
+
+## Features
+### Budgeting
+- Enter monthly income and allocate budgets.
+- Track expenses visually with a dynamic pie chart.
+- Real-time warnings for budget overages.
+
+### Goal Tracking
+- Define financial goals with target amounts and deadlines.
+- View progress through visual indicators and update goals as needed.
+
+### Investment Tracking
+- Add and track investments.
+- Visualize portfolio growth with interactive line charts.
+
+### Resources
+- Educational tools and links to improve financial literacy.
+
+---
+
+## Getting Started
+### Prerequisites
+- Modern web browser (e.g., Chrome, Firefox)
+- Internet connection for loading external resources (e.g., Chart.js)
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/financial-planner.git
