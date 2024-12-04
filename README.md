@@ -3,7 +3,7 @@ Open Source Software Project
 # Financial Planner
 
 ## Mission Statement
-"Our mission is to empower individuals with accessible, intuitive, and transparent tools for financial planning. Through our open-source financial planner, we aim to foster financial literacy, promote informed decision-making, and provide robust stock tracking and budgeting features, all while embracing collaboration, innovation, and community-driven development."
+Our mission is to empower individuals with accessible, intuitive, and transparent tools for financial planning. Through our open-source financial planner, we aim to foster financial literacy, promote informed decision-making, and provide robust stock tracking and budgeting features, all while embracing collaboration, innovation, and community-driven development.
 
 ## Overview
 The Financial Planner is a web-based application designed to help users manage their personal finances. It provides features for budgeting, setting financial goals, tracking investments, and accessing educational resources. The project is structured with HTML, CSS, and JavaScript, utilizing Chart.js for data visualization.
